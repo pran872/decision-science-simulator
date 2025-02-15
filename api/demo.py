@@ -1,13 +1,10 @@
-from httpx import Request
+from http.server import BaseHTTPRequestHandler
 
-# def handler(request: Request):
-#     return {
-#         "statusCode": 200,
-#         "body": "Hello, World!"
-#     }
+class handler(BaseHTTPRequestHandler):
 
-def handler(event, context):
-    return {
-        "statusCode": 200,
-        "body": "Hello, World!"
-    }
+    def do_GET(self):
+        self.send_response(200)
+        self.send_header('Content-type','text/plain')
+        self.end_headers()
+        self.wfile.write('Hello, world!'.encode('utf-8'))
+        return
